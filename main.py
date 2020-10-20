@@ -34,7 +34,9 @@ def center_data(data, exclude_indices=[]):
 def compute_error(P, Q, correspondances):
     err = 0
     for i in range(P.shape[1]):
-        err += np.linalg.norm(P[:,i] - Q[:,correspondances[i][1]])
+        diff = P[:,i] - Q[:,correspondances[i][1]]
+        diff = np.dot(diff, diff.T)
+        err += diff
     return err
 
 def compute_cross_covariance(P, Q, correspondences, kernel=lambda diff: 1.0):
