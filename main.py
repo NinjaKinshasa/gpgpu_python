@@ -33,7 +33,7 @@ def center_data(data, exclude_indices=[]):
 
 def compute_error(P, Q, correspondances):
     err = 0
-    for i in range(len(P)):
+    for i in range(P.shape[1]):
         err += np.linalg.norm(P[:,i] - Q[:,correspondances[i][1]])
     return err
 
@@ -52,7 +52,7 @@ def compute_cross_covariance(P, Q, correspondences, kernel=lambda diff: 1.0):
 def save(P):
     f = open("transformation.txt", "w")
     f.write("Points_0,Points_1,Points_2\n")
-    for i in range (len(P)):
+    for i in range(P.shape[1]):
         f.write(str(P[:,i][0])+","+str(P[:,i][1])+","+str(P[:,i][2])+"\n")
     f.close()
 
